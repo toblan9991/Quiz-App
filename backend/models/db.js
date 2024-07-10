@@ -26,9 +26,17 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+const quizSchema = new mongoose.Schema({
+  user_id: String,
+  title: String,
+  questions: Array,
+}, { collection: 'quiz-data' });
+
 const userapps = mongoose.model("userapps", userSchema);
+const Quiz = mongoose.model("Quiz", quizSchema);
 
 module.exports = {
   connectDB,
   userapps,
+  Quiz,
 };
