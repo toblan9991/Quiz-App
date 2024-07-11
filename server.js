@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "./Backend/.env" });
 const express = require("express");
+const cors = require("cors"); 
 const appMiddlewares = require("./backend/middlewares/appMiddlewares");
 const connectDB = require("./backend/models/db").connectDB;
 const loginRouter = require("./backend/routes/loginRouter");
@@ -10,6 +11,13 @@ const homeRouter = require("./backend/routes/homeRouter");
 const quizRouter = require("./backend/routes/quizRouter");
 
 const app = express();
+
+// Configuring CORS
+app.use(cors({
+    origin: "http://localhost:5173",  
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true // Allows cookies to be sent and received
+}));
 
 // Middleware setup
 appMiddlewares(app);

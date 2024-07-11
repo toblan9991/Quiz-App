@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Quiz</title>
+</head>
+<body>
+  <h1>Take Quiz</h1>
+  <% if (quizzes && quizzes.length > 0) { %>
+    <form id="quizForm">
+      <% quizzes.forEach((quiz, quizIndex) => { %>
+        <div>
+          <h2><%= quiz.title %></h2>
+          <% quiz.questions.forEach((question, index) => { %>
+            <div>
+              <p><%= index + 1 %>. <%= question.text %></p>
+              <% question.options.forEach((option, optionIndex) => { %>
+                <label>
+                  <input type="radio" name="question<%= index %>" value="<%= option.text %>"
+                    data-correct="<%= option.is_correct %>" required>
+                  <%= option.text %>
+                </label>
+              <% }); %>
+            </div>
+          <% }); %>
+        </div>
+      <% }); %>
+      <button type="button" onclick="submitQuiz()">Submit</button>
+    </form>
+  <% } else { %>
+    <p>No quizzes available at the moment.</p>
+  <% } %>
+
+  <script>
+    function submitQuiz() {
+      var form = document.getElementById('quizForm');
+      var isValid = form.checkValidity();
+      form.reportValidity(); // to trigger the browser's built-in validation UI
+      
+      if (isValid) {
+        var inputs = form.querySelectorAll('input[type="radio"]:checked');
+        var score = 0;
+        inputs.forEach(input => {
+          if (input.dataset.correct === "true") {
+            score++;
+          }
+        });
+
+        var totalQuestions = inputs.length; 
+        alert('Your score is ' + score + ' out of ' + totalQuestions);
+    
+      } else {
+        alert('Please answer all questions before submitting.');
+      }
+    }
+  </script>
+</body>
+</html>
