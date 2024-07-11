@@ -20,6 +20,7 @@ const connectDB = async () => {
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
+  githubId: String,
   role: {
     type: String,
     default: "user",
