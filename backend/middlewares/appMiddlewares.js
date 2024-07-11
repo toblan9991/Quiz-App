@@ -12,7 +12,8 @@ const appMiddlewares = (app) => {
   app.use(session({
     secret: 'your_secret_key',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { secure: false } // Set to true if using HTTPS
   }));
 
   //view engine and views directory

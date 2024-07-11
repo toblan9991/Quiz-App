@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
+const jwt = require('jsonwebtoken'); 
 const { userapps } = require('../models/db');
 
 passport.use(new GitHubStrategy({
@@ -41,6 +42,15 @@ const githubAuth = passport.authenticate('github', { scope: [ 'user:email' ] });
 const githubAuthCallback = passport.authenticate('github', { failureRedirect: '/login' });
 
 const githubAuthRedirect = (req, res) => {
+  const token = jwt.sign(
+    { username: req.user.username, role: req.user.role },
+    "anykey",
+    { expiresIn: "3d" }
+  );
+  res.cookie("token", token, {
+    maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
+    httpOnly: true,
+  });
   res.redirect('/dashboard');
 };
 
