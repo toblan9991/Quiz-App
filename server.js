@@ -1,3 +1,4 @@
+// server.js
 require("dotenv").config({ path: "./Backend/.env" });
 const express = require("express");
 const appMiddlewares = require("./backend/middlewares/appMiddlewares");

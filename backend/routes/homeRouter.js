@@ -1,3 +1,4 @@
+// backend/routes/homeRouter.js
 const express = require("express");
 const homeController = require("../controllers/homeController");
 

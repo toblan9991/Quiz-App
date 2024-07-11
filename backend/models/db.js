@@ -1,3 +1,4 @@
+// backend/models/db.js
 require("dotenv").config({ path: "./Backend/.env" });
 const mongoose = require("mongoose");
 
@@ -20,6 +21,7 @@ const connectDB = async () => {
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
+  githubId: String,
   role: {
     type: String,
     default: "user",

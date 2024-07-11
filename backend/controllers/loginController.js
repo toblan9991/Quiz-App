@@ -1,3 +1,4 @@
+// backend/controllers/loginController.js
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
