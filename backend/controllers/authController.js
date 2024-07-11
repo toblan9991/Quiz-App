@@ -11,8 +11,8 @@ async (accessToken, refreshToken, profile, done) => {
   try {
     let user = await userapps.findOne({ githubId: profile.id });
     if (!user) {
-      user = await userapps.create({ 
-        username: profile.username, 
+      user = await userapps.create({
+        username: profile.username,
         githubId: profile.id,
         role: 'user'
       });

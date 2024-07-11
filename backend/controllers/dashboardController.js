@@ -1,4 +1,3 @@
-// backend/controllers/dashboardController.js
 const dashboardController = async (req, res) => {
   const username = req.userData ? req.userData.username : null;
   if (username) {

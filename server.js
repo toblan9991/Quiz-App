@@ -1,6 +1,7 @@
-// server.js
 require("dotenv").config({ path: "./Backend/.env" });
 const express = require("express");
+const session = require("express-session"); 
+const passport = require("passport"); 
 const appMiddlewares = require("./backend/middlewares/appMiddlewares");
 const connectDB = require("./backend/models/db").connectDB;
 const loginRouter = require("./backend/routes/loginRouter");
@@ -8,8 +9,18 @@ const registerRouter = require("./backend/routes/registerRouter");
 const dashboardRouter = require("./backend/routes/dashboardRouter");
 const logoutRouter = require("./backend/routes/logoutRouter");
 const homeRouter = require("./backend/routes/homeRouter");
+const authRouter = require("./backend/routes/authRouter"); 
 
 const app = express();
+
+app.use(session({
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize()); 
+app.use(passport.session()); 
 
 // Middleware setup
 appMiddlewares(app);
@@ -23,6 +34,7 @@ connectDB()
     app.use("/", registerRouter);
     app.use("/", dashboardRouter);
     app.use("/", logoutRouter);
+    app.use("/", authRouter); 
 
     // Start the server
     const PORT = process.env.PORT || 3000;

@@ -1,4 +1,3 @@
-// backend/controllers/logoutController.js
 const logoutController = (req, res) => {
   res.clearCookie("token");
   res.redirect("/login");

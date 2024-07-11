@@ -1,4 +1,3 @@
-// backend/routes/registerRouter.js
 const express = require("express");
 const registerController = require("../controllers/registerController");
 
