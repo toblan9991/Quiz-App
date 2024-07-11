@@ -1,7 +1,7 @@
 require("dotenv").config({ path: "./Backend/.env" });
 const express = require("express");
-const session = require("express-session"); 
-const passport = require("passport"); 
+const session = require("express-session");
+const passport = require("passport");
 const appMiddlewares = require("./backend/middlewares/appMiddlewares");
 const connectDB = require("./backend/models/db").connectDB;
 const loginRouter = require("./backend/routes/loginRouter");
@@ -16,11 +16,12 @@ const app = express();
 app.use(session({
   secret: 'your_secret_key',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { secure: false } // Set to true if using HTTPS
 }));
 
-app.use(passport.initialize()); 
-app.use(passport.session()); 
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Middleware setup
 appMiddlewares(app);
