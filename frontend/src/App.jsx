@@ -1,10 +1,10 @@
-import React from 'react';
+import TakeQuiz from "./components/TakeQuiz";
 
 function App() {
-
   return (
     <div className="App">
-        <p>welcome</p>
+      <p>welcome</p>
+      <TakeQuiz />
     </div>
   );
 }
