@@ -1,10 +1,5 @@
-To run the app
+# How to run the app
 
-npm run dev
+1) At the root of the project folder, run "npm run dev" to run both backend and frontend
 
-
-In a different terminal tab
-
-cd frontend
-
-npm run dev
+2) Run the app using this url (http://localhost:3000/)
