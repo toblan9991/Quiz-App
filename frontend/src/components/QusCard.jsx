@@ -1,4 +1,4 @@
-QusCard function QusCard({ qus, choice, choicesHandler }) {
+function QusCard({ qus, choice, choicesHandler }) {
   return (
     <div>
       <input
