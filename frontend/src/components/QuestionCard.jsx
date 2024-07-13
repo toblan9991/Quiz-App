@@ -82,4 +82,5 @@ function QuestionCard({ questionSet }) {
   );
 }
 
-export default QuestionCard;
+
+

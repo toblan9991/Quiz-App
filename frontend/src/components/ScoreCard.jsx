@@ -16,3 +16,4 @@ function ScoreCard({ correct, noOfQus }) {
 }
 
 export default ScoreCard;
+
