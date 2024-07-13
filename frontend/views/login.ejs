@@ -31,13 +31,13 @@
         <h1 class="text-center">Login</h1>
         <form action="/login" method="post">
           <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
+            <label for="email" class="form-label">Email</label>
             <input
-              type="text"
+              type="email"
               class="form-control"
-              name="username"
-              id="username"
-              placeholder="Enter your username"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
             />
           </div>
           <div class="mb-3">
@@ -56,10 +56,11 @@
           <a href="/register">Sign Up</a>
         </form>
         <div class="text-center">
-          <a href="/auth/github" class="btn btn-dark github-button">Login with GitHub</a>
+          <a href="/auth/github" class="btn btn-dark github-button"
+            >Login with GitHub</a
+          >
         </div>
       </div>
     </div>
   </body>
 </html>
-

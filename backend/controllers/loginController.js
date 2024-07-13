@@ -10,13 +10,13 @@ const loginForm = (req, res) => {
 };
 
 const loginLogic = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    const userFound = await userapps.findOne({ username });
+    const userFound = await userapps.findOne({ email });
 
     if (userFound && (await bcrypt.compare(password, userFound.password))) {
       const token = jwt.sign(
-        { username: userFound.username, role: userFound.role },
+        { email: userFound.email, role: userFound.role },
         "anykey",
         { expiresIn: "3d" }
       );

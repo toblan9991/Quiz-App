@@ -1,7 +1,7 @@
 const dashboardController = async (req, res) => {
-  const username = req.userData ? req.userData.username : null;
-  if (username) {
-    res.render("dashboard", { username });
+  const email = req.userData ? req.userData.email : null;
+  if (email) {
+    res.render("dashboard", { email });
   } else {
     res.redirect("/login");
   }

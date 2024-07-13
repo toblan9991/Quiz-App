@@ -22,7 +22,7 @@
   <body>
     <div class="container">
       <div class="dashboard-container">
-        <h1 class="text-center">Welcome, <%= username %></h1>
+        <h1 class="text-center">Welcome, <%= email %></h1>
         <div class="text-center logout-button">
           <a href="/take-quiz" class="btn btn-primary">Take Quiz</a>
           <a href="/logout" class="btn btn-danger">Logout</a>
@@ -34,151 +34,169 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      padding: 40px 20px 120px 20px;
-    }
-    nav {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 0;
-      text-align: center;
-    }
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-    nav ul li {
-      display: inline;
-      margin: 0 10px;
-    }
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
-    .container {
-      display: flex;
-      align-items: center;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    .card {
-      width: 100%;
-      background-color: white;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .charts {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-    }
-    .chart-container {
-      width: 30%;
-    }
-    .chart-container.bar {
-      width: 35%;
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="/take-quiz" class="btn btn-primary">Take Quiz</a></li>
-      <li><a href="#contact">Create Quiz</a></li>
-      <li><a href="/logout" class="btn btn-danger">Logout</a></li>
-    </ul>
-  </nav>
-  <div class="container">
-    <div class="card">
-      <div class="charts">
-        <div class="chart-container">
-          <h2>Pie Chart</h2>
-          <canvas id="pieChart"></canvas>
-        </div>
-        <div class="chart-container bar">
-          <h2>Bar Graph</h2>
-          <canvas id="barChart"></canvas>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 40px 20px 120px 20px;
+      }
+      nav {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav ul li {
+        display: inline;
+        margin: 0 10px;
+      }
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .card {
+        width: 100%;
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .charts {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+      .chart-container {
+        width: 30%;
+      }
+      .chart-container.bar {
+        width: 35%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="/take-quiz" class="btn btn-primary">Take Quiz</a></li>
+        <li><a href="#contact">Create Quiz</a></li>
+        <li><a href="/logout" class="btn btn-danger">Logout</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="card">
+        <div class="charts">
+          <div class="chart-container">
+            <h2>Pie Chart</h2>
+            <canvas id="pieChart"></canvas>
+          </div>
+          <div class="chart-container bar">
+            <h2>Bar Graph</h2>
+            <canvas id="barChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const pieData = {
-        labels: ['Maths', 'English', 'SocialScience', 'Chemistry', 'Java', 'Python'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 20, 3, 6],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const pieData = {
+          labels: [
+            "Maths",
+            "English",
+            "SocialScience",
+            "Chemistry",
+            "Java",
+            "Python",
           ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+          datasets: [
+            {
+              label: "# of Votes",
+              data: [12, 19, 3, 20, 3, 6],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+            },
           ],
-          borderWidth: 1
-        }]
-      };
+        };
 
-      const barData = {
-        labels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
+        const barData = {
+          labels: [
+            "Level 1",
+            "Level 2",
+            "Level 3",
+            "Level 4",
+            "Level 5",
+            "Level 6",
           ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+          datasets: [
+            {
+              label: "# of Votes",
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+            },
           ],
-          borderWidth: 1
-        }]
-      };
+        };
 
-      const pieCtx = document.getElementById('pieChart').getContext('2d');
-      const barCtx = document.getElementById('barChart').getContext('2d');
+        const pieCtx = document.getElementById("pieChart").getContext("2d");
+        const barCtx = document.getElementById("barChart").getContext("2d");
 
-      new Chart(pieCtx, {
-        type: 'pie',
-        data: pieData
+        new Chart(pieCtx, {
+          type: "pie",
+          data: pieData,
+        });
+
+        new Chart(barCtx, {
+          type: "bar",
+          data: barData,
+        });
       });
-
-      new Chart(barCtx, {
-        type: 'bar',
-        data: barData
-      });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
