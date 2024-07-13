@@ -9,7 +9,8 @@ const registerRouter = require("./backend/routes/registerRouter");
 const dashboardRouter = require("./backend/routes/dashboardRouter");
 const logoutRouter = require("./backend/routes/logoutRouter");
 const homeRouter = require("./backend/routes/homeRouter");
-const authRouter = require("./backend/routes/authRouter"); 
+const authRouter = require("./backend/routes/authRouter");
+const quizRouter = require("./backend/routes/quizRouter");
 
 const app = express();
 
@@ -35,7 +36,8 @@ connectDB()
     app.use("/", registerRouter);
     app.use("/", dashboardRouter);
     app.use("/", logoutRouter);
-    app.use("/", authRouter); 
+    app.use("/", authRouter);
+    app.use("/", quizRouter); 
 
     // Start the server
     const PORT = process.env.PORT || 3000;
