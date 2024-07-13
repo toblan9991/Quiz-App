@@ -1,6 +1,11 @@
 const jwt = require("jsonwebtoken");
 
 const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    req.userData = req.user;
+    return next();
+  }
+
   const token = req.cookies.token;
   if (!token) {
     return res.redirect("/login");

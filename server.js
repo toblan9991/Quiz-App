@@ -1,6 +1,7 @@
 require("dotenv").config({ path: "./Backend/.env" });
 const express = require("express");
-const cors = require("cors"); 
+const session = require("express-session");
+const passport = require("passport");
 const appMiddlewares = require("./backend/middlewares/appMiddlewares");
 const connectDB = require("./backend/models/db").connectDB;
 const loginRouter = require("./backend/routes/loginRouter");
@@ -8,16 +9,20 @@ const registerRouter = require("./backend/routes/registerRouter");
 const dashboardRouter = require("./backend/routes/dashboardRouter");
 const logoutRouter = require("./backend/routes/logoutRouter");
 const homeRouter = require("./backend/routes/homeRouter");
+const authRouter = require("./backend/routes/authRouter");
 const quizRouter = require("./backend/routes/quizRouter");
 
 const app = express();
 
-// Configuring CORS
-app.use(cors({
-    origin: "http://localhost:5173",  
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true // Allows cookies to be sent and received
+app.use(session({
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // Set to true if using HTTPS
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Middleware setup
 appMiddlewares(app);
@@ -31,7 +36,8 @@ connectDB()
     app.use("/", registerRouter);
     app.use("/", dashboardRouter);
     app.use("/", logoutRouter);
-    app.use("/", quizRouter);
+    app.use("/", authRouter);
+    app.use("/", quizRouter); 
 
     // Start the server
     const PORT = process.env.PORT || 3000;
