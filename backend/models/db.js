@@ -18,7 +18,7 @@ const connectDB = async () => {
 };
 
 const userSchema = new mongoose.Schema({
-  username: String,
+  email: String,
   password: String,
   githubId: String,
   role: {
@@ -27,11 +27,14 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const quizSchema = new mongoose.Schema({
-  user_id: String,
-  title: String,
-  questions: Array,
-}, { collection: 'quiz-data' });
+const quizSchema = new mongoose.Schema(
+  {
+    user_id: String,
+    title: String,
+    questions: Array,
+  },
+  { collection: "quiz-data" }
+);
 
 const userapps = mongoose.model("userapps", userSchema);
 const Quiz = mongoose.model("Quiz", quizSchema);

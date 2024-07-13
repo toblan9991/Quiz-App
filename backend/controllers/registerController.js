@@ -8,12 +8,12 @@ registerController.getRegister = (req, res) => {
 };
 
 registerController.postRegister = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
     await userapps.create({
-      username,
+      email,
       password: hashedPassword,
     });
     res.redirect("/login");
