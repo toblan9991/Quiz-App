@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "./Backend/.env" });
 const express = require("express");
+const bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require("passport");
 const appMiddlewares = require("./backend/middlewares/appMiddlewares");
@@ -13,6 +14,9 @@ const authRouter = require("./backend/routes/authRouter");
 const quizRouter = require("./backend/routes/quizRouter");
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
   secret: 'your_secret_key',

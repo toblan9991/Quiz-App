@@ -25,6 +25,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Middleware setup
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 appMiddlewares(app);
 
 // Connect to MongoDB
