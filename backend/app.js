@@ -11,8 +11,12 @@ const registerRouter = require("./backend/routes/registerRouter");
 const dashboardRouter = require("./backend/routes/dashboardRouter");
 const logoutRouter = require("./backend/routes/logoutRouter");
 const authRouter = require("./backend/routes/authRouter");
+const rateLimiter = require('./backend/middlewares/rateLimiter');
 
 const app = express();
+
+// Apply rate limiting to all requests
+app.use(rateLimiter);
 
 app.use(session({
   secret: 'your_secret_key',

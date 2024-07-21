@@ -12,8 +12,12 @@ const logoutRouter = require("./backend/routes/logoutRouter");
 const homeRouter = require("./backend/routes/homeRouter");
 const authRouter = require("./backend/routes/authRouter");
 const quizRouter = require("./backend/routes/quizRouter");
+const rateLimiter = require('./backend/middlewares/rateLimiter');
 
 const app = express();
+
+// Apply rate limiting to all requests
+app.use(rateLimiter);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
