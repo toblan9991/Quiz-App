@@ -6,7 +6,8 @@ const { userapps } = require('../models/db');
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/github/callback"
+  // callbackURL: "http://localhost:3000/auth/github/callback"
+  callbackURL: "http://44.204.3.24:3000/auth/github/callback" // for aws server
 },
 async (accessToken, refreshToken, profile, done) => {
   try {
