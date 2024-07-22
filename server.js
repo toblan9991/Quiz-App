@@ -1,5 +1,4 @@
 // server.js
-// require('dotenv').config({ path: './.env' });
 require("dotenv").config({ path: "./Backend/.env" });
 const express = require("express");
 const bodyParser = require('body-parser');
@@ -54,3 +53,5 @@ connectDB()
   .catch((error) => {
     console.error("Error connecting to database:", error);
   });
+
+  // require('dotenv').config({ path: './.env' });

@@ -4,6 +4,9 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const jwt = require('jsonwebtoken'); 
 const { userapps } = require('../models/db');
 
+console.log('GITHUB_CLIENT_ID:', process.env.GITHUB_CLIENT_ID); // Add this line
+console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET); // Add this line
+
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
