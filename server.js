@@ -15,6 +15,12 @@ const authRouter = require("./backend/routes/authRouter");
 const quizRouter = require("./backend/routes/quizRouter");
 
 const app = express();
+const { githubAuth, githubAuthCallback, githubAuthRedirect } = require('./backend/controllers/authController');
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,6 +50,9 @@ connectDB()
     app.use("/", authRouter);
     app.use("/", quizRouter); 
 
+    app.get('/auth/github', githubAuth);
+    app.get('/auth/github/callback', githubAuthCallback, githubAuthRedirect);
+
     // Start the server
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
@@ -52,6 +61,11 @@ connectDB()
   })
   .catch((error) => {
     console.error("Error connecting to database:", error);
+  });
+
+  app.use((err, req, res, next) => {
+    console.error('Error occurred:', err);
+    res.status(500).send('Internal Server Error');
   });
 
   // require('dotenv').config({ path: './.env' });
