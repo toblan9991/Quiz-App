@@ -50,8 +50,8 @@ connectDB()
     app.use("/", authRouter);
     app.use("/", quizRouter); 
 
-    app.get('/auth/github', githubAuth);
-    app.get('/auth/github/callback', githubAuthCallback, githubAuthRedirect);
+    // app.get('/auth/github', githubAuth);
+    // app.get('/auth/github/callback', githubAuthCallback, githubAuthRedirect);
 
     // Start the server
     const PORT = process.env.PORT || 3000;
