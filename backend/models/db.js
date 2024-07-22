@@ -1,5 +1,5 @@
 // backend/models/db.js
-require("dotenv").config({ path: "./Backend/.env" });
+require("dotenv").config({ path: "./backend/.env" });
 const mongoose = require("mongoose");
 
 const url = process.env.REACT_APP_MONGO_URL;
