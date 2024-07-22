@@ -1,3 +1,4 @@
+// backend/controllers/logoutController.js
 const logoutController = (req, res, next) => {
   res.clearCookie("token"); // Clear the JWT token cookie
   req.logout((err) => {

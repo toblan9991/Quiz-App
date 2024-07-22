@@ -1,3 +1,4 @@
+// backend/routes/logoutRouter.js
 const express = require("express");
 const logoutController = require("../controllers/logoutController");
 const isAuthenticated = require("../middlewares/authMiddleware");

@@ -1,3 +1,4 @@
+// backend/routes/authRouter.js
 const express = require('express');
 const passport = require('passport');
 const { githubAuth, githubAuthCallback, githubAuthRedirect } = require('../controllers/authController');

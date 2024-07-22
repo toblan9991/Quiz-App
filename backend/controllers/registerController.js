@@ -1,3 +1,4 @@
+// backend/controllers/registerController.js
 const bcrypt = require("bcrypt");
 const { userapps } = require("../models/db");
 
