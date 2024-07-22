@@ -1,35 +1,34 @@
-// backend/controllers/authController.js
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 const jwt = require('jsonwebtoken'); 
 const { userapps } = require('../models/db');
 
-console.log('GITHUB_CLIENT_ID:', process.env.GITHUB_CLIENT_ID); // Add this line
-console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET); // Add this line
+console.log('GITHUB_CLIENT_ID:', process.env.GITHUB_CLIENT_ID);
+console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET);
 
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  // callbackURL: "http://localhost:3000/auth/github/callback"
-  callbackURL: "http://35.171.18.88:3000/auth/github/callback" // for aws server http://35.171.18.88
-  //  callbackURL: "http://35.171.18.88:3000/auth/github/callback"
-},
-async (accessToken, refreshToken, profile, done) => {
+  callbackURL: "http://23.22.212.18:3000/auth/github/callback"
+}, async (accessToken, refreshToken, profile, done) => {
   try {
+    console.log('GitHub profile:', profile);
     let user = await userapps.findOne({ githubId: profile.id });
     if (!user) {
+      console.log('Creating new user with GitHub profile:', profile);
       user = await userapps.create({
         username: profile.username,
         githubId: profile.id,
         role: 'user'
       });
     }
+    console.log('User found or created:', user);
     return done(null, user);
   } catch (error) {
+    console.error('Error in GitHub strategy callback:', error);
     return done(error, null);
   }
-}
-));
+}));
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -45,9 +44,29 @@ passport.deserializeUser(async (id, done) => {
 });
 
 const githubAuth = passport.authenticate('github', { scope: [ 'user:email' ] });
-const githubAuthCallback = passport.authenticate('github', { failureRedirect: '/login' });
+const githubAuthCallback = (req, res, next) => {
+  passport.authenticate('github', (err, user, info) => {
+    if (err) {
+      console.error('GitHub authentication error:', err);
+      return next(err);
+    }
+    if (!user) {
+      console.log('GitHub authentication failed, redirecting to login.');
+      return res.redirect('/login');
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        console.error('Login error after GitHub authentication:', err);
+        return next(err);
+      }
+      console.log('GitHub authentication successful, user logged in:', user);
+      next();
+    });
+  })(req, res, next);
+};
 
 const githubAuthRedirect = (req, res) => {
+  console.log('User authenticated, redirecting to dashboard.');
   const token = jwt.sign(
     { username: req.user.username, role: req.user.role },
     "anykey",
