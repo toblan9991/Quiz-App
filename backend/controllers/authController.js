@@ -45,6 +45,7 @@ passport.deserializeUser(async (id, done) => {
 
 const githubAuth = passport.authenticate('github', { scope: [ 'user:email' ] });
 const githubAuthCallback = (req, res, next) => {
+  console.log('GitHub authentication callback');
   passport.authenticate('github', (err, user, info) => {
     if (err) {
       console.error('GitHub authentication error:', err);
