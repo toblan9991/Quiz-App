@@ -11,7 +11,7 @@ passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
   // callbackURL: "http://localhost:3000/auth/github/callback"
-  callbackURL: "http://35.173.232.79:3000/auth/github/callback" // for aws server https://35.173.232.79/
+  callbackURL: "http://3.87.1.26:3000/auth/github/callback" // for aws server http://3.87.1.26/
 },
 async (accessToken, refreshToken, profile, done) => {
   try {
