@@ -9,7 +9,7 @@ console.log('GITHUB_CLIENT_SECRET:', process.env.GITHUB_CLIENT_SECRET);
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://23.22.212.18:3000/auth/github/callback"
+  callbackURL: "http://23.22.212.18/auth/github/callback"
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     console.log('GitHub profile:', profile);
