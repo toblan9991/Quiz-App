@@ -1,3 +1,4 @@
+// backend/controllers/authController.js
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 const jwt = require('jsonwebtoken'); 
@@ -7,7 +8,7 @@ passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
   // callbackURL: "http://localhost:3000/auth/github/callback"
-  callbackURL: "http://44.204.3.24:3000/auth/github/callback" // for aws server
+  callbackURL: "http://35.173.232.79:3000/auth/github/callback" // for aws server https://35.173.232.79/
 },
 async (accessToken, refreshToken, profile, done) => {
   try {
