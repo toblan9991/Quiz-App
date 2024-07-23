@@ -1,4 +1,3 @@
-// backend/models/db.js
 require("dotenv").config({ path: "./backend/.env" });
 const mongoose = require("mongoose");
 

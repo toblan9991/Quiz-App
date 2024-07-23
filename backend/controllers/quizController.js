@@ -1,4 +1,3 @@
-// backend/controllers/quizController.js
 const { Quiz } = require("../models/db");
 
 const getQuizzes = async (req, res) => {
