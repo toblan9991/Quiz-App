@@ -17,7 +17,7 @@ const rateLimiter = require('./backend/middlewares/rateLimiter');
 const app = express();
 
 // Apply rate limiting to all requests
-app.use(rateLimiter);
+//app.use(rateLimiter);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,6 +34,11 @@ app.use(passport.session());
 
 // Middleware setup
 appMiddlewares(app);
+
+// Apply rate limiting to specific routes
+app.use('/login', rateLimiter);
+//app.use('/register', rateLimiter);
+//app.use('/auth/github', rateLimiter);
 
 // Connect to MongoDB
 connectDB()
