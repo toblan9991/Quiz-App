@@ -14,12 +14,12 @@ const authRouter = require("./backend/routes/authRouter");
 const quizRouter = require("./backend/routes/quizRouter");
 
 const app = express();
-const { githubAuth, githubAuthCallback, githubAuthRedirect } = require('./backend/controllers/authController');
+//const { githubAuth, githubAuthCallback, githubAuthRedirect } = require('./backend/controllers/authController');
 
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(`${req.method} ${req.url}`);
+//   next();
+// });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,7 +28,7 @@ app.use(session({
   secret: 'your_secret_key',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false } // Set to true if using HTTPS
+  cookie: { secure: true} // Set to true if using HTTPS
 }));
 
 app.use(passport.initialize());
@@ -62,9 +62,9 @@ connectDB()
     console.error("Error connecting to database:", error);
   });
 
-  app.use((err, req, res, next) => {
-    console.error('Error occurred:', err);
-    res.status(500).send('Internal Server Error');
-  });
+  // app.use((err, req, res, next) => {
+  //   console.error('Error occurred:', err);
+  //   res.status(500).send('Internal Server Error');
+  // });
 
   // require('dotenv').config({ path: './.env' });
