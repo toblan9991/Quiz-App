@@ -1,4 +1,3 @@
-// backend/routes/dashboardRouter.js
 const express = require("express");
 const dashboardController = require("../controllers/dashboardController");
 const isAuthenticated = require("../middlewares/authMiddleware");

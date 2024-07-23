@@ -1,4 +1,3 @@
-// backend/routes/quizRouter.js
 const express = require("express");
 const { getQuizzes, quizScore } = require("../controllers/quizController");
 
