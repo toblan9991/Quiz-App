@@ -4,7 +4,7 @@ const { userapps } = require("../models/db");
 const registerController = {};
 
 registerController.getRegister = (req, res) => {
-  res.render("register"); // Assuming you're using a template engine like EJS or Pug
+  res.render("Register"); // Assuming you're using a template engine like EJS or Pug
 };
 
 registerController.postRegister = async (req, res) => {

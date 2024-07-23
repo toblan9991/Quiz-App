@@ -11,15 +11,8 @@ const loginForm = (req, res) => {
 
 const loginLogic = async (req, res) => {
   const { username, password } = req.body;
-  // logging error for fixing body-parser
-  // console.log(`Received login request for username: ${username}`);
   try {
     const userFound = await userapps.findOne({ username });
-    // if (!userFound) {
-    //   console.log(`No user found with username: ${username}`);
-    //   return res.send("Invalid login credentials");
-    // }
-    // console.log(`Comparing passwords: ${password} with hash: ${userFound.password}`);
 
     if (userFound && (await bcrypt.compare(password, userFound.password))) {
       const token = jwt.sign(

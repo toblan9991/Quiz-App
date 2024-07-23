@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "./Backend/.env" });
+require("dotenv").config({ path: "./backend/.env" });
 const express = require("express");
 const bodyParser = require('body-parser');
 const session = require("express-session");
@@ -15,6 +15,12 @@ const quizRouter = require("./backend/routes/quizRouter");
 const rateLimiter = require('./backend/middlewares/rateLimiter');
 
 const app = express();
+//const { githubAuth, githubAuthCallback, githubAuthRedirect } = require('./backend/controllers/authController');
+
+// app.use((req, res, next) => {
+//   console.log(`${req.method} ${req.url}`);
+//   next();
+// });
 
 // Apply rate limiting to all requests
 //app.use(rateLimiter);
@@ -26,7 +32,7 @@ app.use(session({
   secret: 'your_secret_key',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false } // Set to true if using HTTPS
+  cookie: { secure: true} // Set to true if using HTTPS
 }));
 
 app.use(passport.initialize());
@@ -52,6 +58,9 @@ connectDB()
     app.use("/", authRouter);
     app.use("/", quizRouter); 
 
+    // app.get('/auth/github', githubAuth);
+    // app.get('/auth/github/callback', githubAuthCallback, githubAuthRedirect);
+
     // Start the server
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
@@ -61,3 +70,10 @@ connectDB()
   .catch((error) => {
     console.error("Error connecting to database:", error);
   });
+
+  // app.use((err, req, res, next) => {
+  //   console.error('Error occurred:', err);
+  //   res.status(500).send('Internal Server Error');
+  // });
+
+  // require('dotenv').config({ path: './.env' });
