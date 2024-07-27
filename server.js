@@ -25,6 +25,8 @@ const app = express();
 // Apply rate limiting to all requests
 //app.use(rateLimiter);
 
+app.set('trust proxy', 1);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -45,6 +47,12 @@ appMiddlewares(app);
 app.use('/login', rateLimiter);
 //app.use('/register', rateLimiter);
 //app.use('/auth/github', rateLimiter);
+
+app.use((req, res, next) => {
+  console.log('Client IP:', req.ip);
+  next();
+});
+
 
 // Connect to MongoDB
 connectDB()
