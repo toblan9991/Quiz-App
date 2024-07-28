@@ -1,4 +1,3 @@
-// // backend/app.js
 // require('dotenv').config({ path: './.env' });
 // //require("dotenv").config({ path: "./Backend/.env" });
 // const express = require('express');
@@ -15,7 +14,9 @@
 // const logoutRouter = require("./backend/routes/logoutRouter");
 // const authRouter = require("./backend/routes/authRouter");
 
+
 // const app = express();
+
 
 // app.use(session({
 //   secret: 'your_secret_key',
@@ -23,6 +24,7 @@
 //   saveUninitialized: false,
 //   cookie: { secure: false }
 // }));
+
 
 // app.use(passport.initialize());
 // app.use(passport.session());

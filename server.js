@@ -12,6 +12,7 @@ const logoutRouter = require("./backend/routes/logoutRouter");
 const homeRouter = require("./backend/routes/homeRouter");
 const authRouter = require("./backend/routes/authRouter");
 const quizRouter = require("./backend/routes/quizRouter");
+const rateLimiter = require('./backend/middlewares/rateLimiter');
 
 const app = express();
 //const { githubAuth, githubAuthCallback, githubAuthRedirect } = require('./backend/controllers/authController');
@@ -20,6 +21,11 @@ const app = express();
 //   console.log(`${req.method} ${req.url}`);
 //   next();
 // });
+
+// Apply rate limiting to all requests
+//app.use(rateLimiter);
+
+app.set('trust proxy', 1);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,6 +42,17 @@ app.use(passport.session());
 
 // Middleware setup
 appMiddlewares(app);
+
+// Apply rate limiting to specific routes
+app.use('/login', rateLimiter);
+//app.use('/register', rateLimiter);
+//app.use('/auth/github', rateLimiter);
+
+app.use((req, res, next) => {
+  console.log('Client IP:', req.ip);
+  next();
+});
+
 
 // Connect to MongoDB
 connectDB()
